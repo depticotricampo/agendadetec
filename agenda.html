@@ -1,0 +1,136 @@
+<?php
+require 'verificar_login.php';
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="IMG\favicon.jpg" type="image/x-icon">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="">
+  <link href='lib/main.css' rel='stylesheet' />
+  <script src='lib/main.js'></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth'
+
+      });
+      calendar.render();
+    });
+  </script>
+
+  <title>Agenda</title>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <h2 class="logo">COTRICAMPO</h2>
+      <a href="logout.php">Sair</a>
+    </div>
+
+    <div class="w3-container">
+
+      <button onclick="document.getElementById('id01').style.display='block'"
+        class="w3-button w3-green w3-large">Agendar
+        Evento</button>
+
+      <div id="id01" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+          <form class="w3-container" action="agenda.php" method="post">
+
+            <div class="w3-section">
+              <div class="inputBox">
+                <label for="">Título</label>
+                <input type="text" id="Nome" name="Nome" class="inputUser" required>
+              </div>
+              <br><br>
+              <div class="inputBox">
+                <label for="">Data de Início</label>
+                <input type="date" id="d-i" name="d-i" class="inputUser" required>
+              </div>
+              <br><br>
+              <div class="inputBox">
+                <label for="" class="labelInput">Data de termínio</label>
+                <input type="date" id="d-f" name="d-f" class="inputUser" required>
+              </div>
+              <br><br>
+              <div class="inputBox">
+                <label for="">Descrição</label>
+                <input type="text" id="desc" name="desc" class="inputUser" required>
+              </div>
+              <br><br>
+
+              <input type="submit" name="submit" class="w3-button w3-block w3-green w3-section w3-padding">
+            </div>
+
+
+          </form>
+          <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+            <button onclick="document.getElementById('id01').style.display='none'" type="button"
+              class="w3-button w3-red">Cancelar</button>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <form action="sede.php" method="get">
+      <button type="submit" name="Consultar_Data" id="Consultar_Data" class="Consultar_Data">Consultar Eventos</button>
+    </form>
+
+  </header>
+  <div id='calendar'>
+  </div>
+  <style>
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      background-color: #141414;
+      font-family: "Times New Roman", Times, serif;
+      color: white;
+    }
+  </style>
+
+  <div class="footer">
+    <p> &copy; Departamento de T.I | 2025</p>
+  </div>
+</body>
+<script> <!-- código javascript-->
+  
+  Function (){
+          var dateStr = prompt('YYYY-MM-DD');
+          var date = new Date(dateStr + 'pt-BR'); // data padrao americano
+          var datestart = prompt('inicio do evento'); // horário de inicio do evento
+          var dstart = new Date(dstart);
+          var dateend = prompt('fim do evento'); // horário do terminio do evt
+          var dend = new Date(dend);
+          var title = prompt('titulo');
+          var desc = prompt('descrição');
+          var local = prompt('local');
+
+          if (!isNaN(date.valueOf())) { // validação
+            calendar.addEvent({
+              title,
+              start: date,
+              allDay: true
+            });
+            alert('evento add');
+          } else {
+            alert('data invaliida');
+          }
+        }
+</script>
+
+</html>
+
+
